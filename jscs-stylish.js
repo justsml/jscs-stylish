@@ -25,7 +25,7 @@ module.exports = function( errorsCollection ) {
         ];
       } );
       var base = path.dirname( errors.getFilename() );
-      if ( !pathErrorCounts[base] ) {
+      if ( pathErrorCounts[base] ) {
         pathErrorCounts[base] += errors.getErrorCount();
       } else {
         pathErrorCounts[base] = errors.getErrorCount();
