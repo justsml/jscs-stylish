@@ -37,7 +37,7 @@ module.exports = function( errorsCollection ) {
   if ( errorCount ) {
     // Output results
     console.log( report.join('') );
-    console.log( '    Total Error #: ' + errorCount );
+    console.log( chalk.bold( '    Total Error #: ' ) + chalk.red( errorCount ) );
   } else {
     //console.log( 'No code style errors found.' );
   }
