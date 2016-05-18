@@ -26,6 +26,7 @@ module.exports = function( errorsCollection ) {
       return [
         '',
         chalk.underline( errors.getFilename() ),
+        chalk.red( '    Errors: ' + output.length ),
         table( output ),
         ''
       ].join('\n');
@@ -36,8 +37,9 @@ module.exports = function( errorsCollection ) {
   if ( errorCount ) {
     // Output results
     console.log( report.join('') );
+    console.log( '    Total Error #: ' + errorCount );
   } else {
-    console.log( 'No code style errors found.' );
+    //console.log( 'No code style errors found.' );
   }
 };
 
