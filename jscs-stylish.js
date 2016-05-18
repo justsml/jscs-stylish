@@ -45,7 +45,11 @@ module.exports = function( errorsCollection ) {
     // Output results
     console.log( report.join('') );
     console.log( chalk.bold( '    Total Error #: ' ) + chalk.red( errorCount ) );
-    console.log( pathErrorCounts );
+    var errSummary = Object.keys(pathErrorCounts)
+    .map(function(key) {
+      return ['    ', pathErrorCounts(key), key]
+    })
+    console.log( table( errSummary ) );
   } else {
     //console.log( 'No code style errors found.' );
   }
