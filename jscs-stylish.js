@@ -24,7 +24,7 @@ module.exports = function( errorsCollection ) {
           process.platform !== 'win32' ? chalk.blue( error.message ) : chalk.cyan( error.message )
         ];
       } );
-      var base = path.basename( errors.getFilename() );
+      var base = path.pathname( errors.getFilename() );
       if ( !pathErrorCounts[base] ) {
         pathErrorCounts[base] += errors.getErrorCount();
       } else {
