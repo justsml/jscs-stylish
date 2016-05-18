@@ -47,7 +47,7 @@ module.exports = function( errorsCollection ) {
     console.log( chalk.bold( '    Total Error #: ' ) + chalk.red( errorCount ) );
     var errSummary = Object.keys(pathErrorCounts)
     .map(function(key) {
-      return ['    ', pathErrorCounts(key), key]
+      return ['    ', pathErrorCounts[key], key]
     })
     console.log( table( errSummary ) );
   } else {
