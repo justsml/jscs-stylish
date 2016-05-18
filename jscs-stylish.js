@@ -1,12 +1,14 @@
 'use strict';
 var chalk = require( 'chalk' );
 var table = require( 'text-table' );
+var path = require( 'path' );
 
 /**
  * @param {Errors[]} errorsCollection
  */
 module.exports = function( errorsCollection ) {
-  var errorCount = 0;
+  var errorCount = 0,
+      pathErrorCounts = {};
   /**
    * Formatting every error set.
    */
@@ -17,12 +19,17 @@ module.exports = function( errorsCollection ) {
       var output = errors.getErrorList().map( function( error ) {
         return [
           '',
-          chalk.gray( error.line ),
+          chalk.white( error.line ),
           chalk.gray( error.column ),
           process.platform !== 'win32' ? chalk.blue( error.message ) : chalk.cyan( error.message )
         ];
       } );
-
+      var base = path.basename( errors.getFilename() );
+      if ( !pathErrorCounts[base] ) {
+        pathErrorCounts[base] += errors.getErrorCount();
+      } else {
+        pathErrorCounts[base] = errors.getErrorCount();
+      }
       return [
         '',
         chalk.underline( errors.getFilename() ),
@@ -38,6 +45,7 @@ module.exports = function( errorsCollection ) {
     // Output results
     console.log( report.join('') );
     console.log( chalk.bold( '    Total Error #: ' ) + chalk.red( errorCount ) );
+    console.log( pathErrorCounts );
   } else {
     //console.log( 'No code style errors found.' );
   }
